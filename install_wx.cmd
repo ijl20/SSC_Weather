@@ -4,22 +4,22 @@ SET msfs_2020_copy_folder="SSC3"
 
 SET msfs_2024_copy_folder="SSC3"
 
-REM ************************************************************************************************************************************************
-REM ************************************************************************************************************************************************
+:: ************************************************************************************************************************************************
+:: ************************************************************************************************************************************************
 
-REM Install script for SSC Weather presets MSFS2020/MSFS2024 Steam or MS Store versions.
+:: Install script for SSC Weather presets MSFS2020/MSFS2024 Steam or MS Store versions.
 
-REM The MSFS Weather Presets folders are:
+:: The MSFS Weather Presets folders are:
 
-REM MSFS 2020 MS Store version: C:\Users\Admin\AppData\Local\Packages\Microsoft.FlightSimulator_[random-letters-&-numbers]\LocalState\Weather\Presets 
-REM MSFS 2020 Steam version:    %appdata%\Microsoft Flight Simulator\Weather\Presets
-REM MSFS 2024 MS Store Version: %localappdata%\Packages\Microsoft.Limitless_8wekyb3d8bbwe\LocalState\Weather\Presets
-REM MSFS 2024 Steam version:    %appdata%\Microsoft Flight Simulator 2024\Weather\Presets
+:: MSFS 2020 MS Store version: %localappdata%\Packages\Microsoft.FlightSimulator_[random-letters-&-numbers]\LocalState\Weather\Presets
+:: MSFS 2020 Steam version:    %appdata%\Microsoft Flight Simulator\Weather\Presets
+:: MSFS 2024 MS Store Version: %localappdata%\Packages\Microsoft.Limitless_8wekyb3d8bbwe\LocalState\Weather\Presets
+:: MSFS 2024 Steam version:    %appdata%\Microsoft Flight Simulator 2024\Weather\Presets
 
-REM This script will DELETE all SSCxxx.WPR files in the Presets folder before installing the ones in this package
+:: This script will DELETE all SSCxxx.WPR files in the Presets folder before installing the ones in this package
 
-REM ************************************************************************************************************************************************
-REM ************************************************************************************************************************************************
+:: ************************************************************************************************************************************************
+:: ************************************************************************************************************************************************
 
 SETLOCAL ENABLEEXTENSIONS ENABLEDELAYEDEXPANSION
 
@@ -42,20 +42,20 @@ ECHO SSC Weather copy completed
 PAUSE
 goto :eof
 
-REM ************************************************************************************************************************************************
-REM ****************                 MSFS 2020          ********************************************************************************************
-REM ************************************************************************************************************************************************
+:: ************************************************************************************************************************************************
+:: ****************                 MSFS 2020          ********************************************************************************************
+:: ************************************************************************************************************************************************
 
 :msfs_2020_ms_store
 ECHO ---------------------------------------------------------------
-REM MSFS 2020 MS Store
+:: MSFS 2020 MS Store
 
-SET msfs_2020_store_prefix="C:\Users\Admin\AppData\Local\Packages\Microsoft.FlightSimulator_*"
+SET msfs_2020_store_prefix="%localappdata%\Packages\Microsoft.FlightSimulator_*"
 SET msfs_2020_store_presets=""
 IF EXIST %msfs_2020_store_prefix% (
-    REM ECHO MSFS 2020 ^(MS Store version^) found on this PC
-    FOR /D %%D in (%msfs_2020_store_prefix%) do ( 
-        REM ECHO MSFS 2020 MS Store found: %%~D 
+    :: ECHO MSFS 2020 ^(MS Store version^) found on this PC
+    FOR /D %%D in (%msfs_2020_store_prefix%) do (
+        :: ECHO MSFS 2020 MS Store found: %%~D
         SET msfs_2020_store_presets="%%~D\LocalState\Weather\Presets"
     )
 ) ELSE (
@@ -72,7 +72,7 @@ if %msfs_2020_store_presets% NEQ "" (
     REM ATTRIB +r "%msfs_2020_store_presets:"=%\SSC*.WPR"
     REM Show completion message with file count
     SET msfs_2020_store_count=0
-    FOR %%x in ("%msfs_2020_store_presets:"=%\SSC*.WPR") DO SET /A msfs_2020_store_count+=1
+    @FOR %%x in ("%msfs_2020_store_presets:"=%\SSC*.WPR") DO @SET /A msfs_2020_store_count+=1
     IF !msfs_2020_store_count! NEQ 0 (
         ECHO Copy of SSC Weather to MSFS 2020 ^(MS Store version^) complete ^(!msfs_2020_store_count! files^)
     ) ELSE (
@@ -83,7 +83,7 @@ goto :eof
 
 :msfs_2020_steam
 ECHO ---------------------------------------------------------------
-REM MSFS 2020 Steam
+:: MSFS 2020 Steam
 
 SET msfs_2020_steam_presets="%appdata%\Microsoft Flight Simulator\Weather\Presets"
 
@@ -97,7 +97,7 @@ IF EXIST %msfs_2020_steam_presets% (
     REM ATTRIB +r "%msfs_2020_steam_presets:"=%\SSC*.WPR"
     REM Show completion message with file count
     SET msfs_2020_steam_count=0
-    FOR %%x in ("%msfs_2020_steam_presets:"=%\SSC*.WPR") DO SET /A msfs_2020_steam_count+=1
+    @FOR %%x in ("%msfs_2020_steam_presets:"=%\SSC*.WPR") DO @SET /A msfs_2020_steam_count+=1
     IF !msfs_2020_steam_count! NEQ 0 (
         ECHO Copy of SSC Weather to MSFS 2020 ^(Steam version^) complete ^(!msfs_2020_steam_count! files^)
     ) ELSE (
@@ -108,13 +108,13 @@ IF EXIST %msfs_2020_steam_presets% (
 )
 goto :eof
 
-REM ************************************************************************************************************************************************
-REM ****************                 MSFS 2024          ********************************************************************************************
-REM ************************************************************************************************************************************************
+:: ************************************************************************************************************************************************
+:: ****************                 MSFS 2024          ********************************************************************************************
+:: ************************************************************************************************************************************************
 
 :msfs_2024_ms_store
 ECHO ---------------------------------------------------------------
-REM MSFS 2024 MS Store
+:: MSFS 2024 MS Store
 
 SET msfs_2024_store_presets="%localappdata%\Packages\Microsoft.Limitless_8wekyb3d8bbwe\LocalState\Weather\Presets"
 
@@ -128,7 +128,7 @@ IF EXIST %msfs_2024_store_presets% (
     REM ATTRIB +r "%msfs_2024_store_presets:"=%\SSC*.WPR"
     REM Show completion message with file count
     SET msfs_2024_store_count=0
-    FOR %%x in ("%msfs_2024_store_presets:"=%\SSC*.WPR") DO SET /A msfs_2024_store_count+=1
+    @FOR %%x in ("%msfs_2024_store_presets:"=%\SSC*.WPR") DO @SET /A msfs_2024_store_count+=1
     IF !msfs_2024_store_count! NEQ 0 (
         ECHO Copy of SSC Weather to MSFS 2024 ^(MS Store version^) complete ^(!msfs_2024_store_count! files^)
     ) ELSE (
@@ -141,7 +141,7 @@ goto :eof
 
 :msfs_2024_steam
 ECHO ---------------------------------------------------------------
-REM MSFS 2024 Steam
+:: MSFS 2024 Steam
 
 SET msfs_2024_steam_presets="%appdata%\Microsoft Flight Simulator 2024\Weather\Presets"
 
@@ -153,9 +153,9 @@ IF EXIST %msfs_2024_steam_presets% (
     ECHO Copying new SSC weather files
     COPY "%msfs_2024_copy_folder:"=%\*.WPR" %msfs_2024_steam_presets% > nul
     REM ATTRIB +r "%msfs_2024_steam_presets:"=%\SSC*.WPR"
-    REM Show completion message with file count
+    REM Show completion message with file
     SET msfs_2024_steam_count=0
-    FOR %%x in ("%msfs_2024_steam_presets:"=%\SSC*.WPR") DO SET /A msfs_2024_steam_count+=1
+    @FOR %%x in ("%msfs_2024_steam_presets:"=%\SSC*.WPR") DO @SET /A msfs_2024_steam_count+=1
     IF !msfs_2024_steam_count! NEQ 0 (
         ECHO Copy of SSC Weather to MSFS 2024 ^(Steam version^) complete ^(!msfs_2024_steam_count! files^)
     ) ELSE (
